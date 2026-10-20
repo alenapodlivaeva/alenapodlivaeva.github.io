@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Алена Подливаева, UGC-креатор в Москве: живые ролики для брендов, школ и заведений.">
+<title>Алена Подливаева UGC</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap">
+<style>
+img{max-width:100%}
+
+/* Layout concept: афиша-плашки. Бежевая страница, красная лента, белые скруглённые плашки,
+   курсивный засечный шрифт только для крупных слов, ролики в вертикальных карточках 9:16.
+   Страница намеренно в одном светлом стиле, как афиша автора. */
+:root {
+  --bg: #e5e1db;
+  --ink: #1e1b1a;
+  --soft: #4a433e;
+  --mute: #7b726a;
+  --red: #c8111f;
+  --pill: #f7f5f2;
+  --pill-line: #d3ccc3;
+  --black: #211e1d;
+  --on-dark: #f4f1ec;
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans: 'Onest', 'Helvetica Neue', Arial, sans-serif;
+  --shadow: 0 14px 28px -18px rgba(70, 45, 30, .45);
+  --r-pill: 22px;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 70px;
+}
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+
+.wrap {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); }
+
+/* top bar */
+.topbar { display: flex; justify-content: space-between; gap: 12px; padding-block: 22px 0; }
+.topbar span:nth-child(2) { color: var(--ink); }
+
+/* hero */
+.hero { padding-block: 22px 8px; }
+.lead { margin: 0; font-weight: 300; font-size: clamp(24px, 4.6vw, 58px); line-height: 1.12; letter-spacing: -.01em; text-wrap: balance; }
+.lead b { font-weight: 700; }
+.sel {
+  position: relative; display: inline-block; margin: 14px 0 0; padding: 0 .12em .1em;
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(40px, 10vw, 128px); line-height: 1.04; letter-spacing: -.02em;
+}
+.sel em { font-style: italic; color: var(--red); white-space: nowrap; }
+.sel::before { content: ""; position: absolute; inset: 4px 0 0 0; border: 1px solid #8a8279; pointer-events: none; }
+.sel i { position: absolute; width: 9px; height: 9px; background: var(--pill); border: 1px solid #6e665e; }
+.sel i:nth-of-type(1) { left: -5px; top: -1px; }
+.sel i:nth-of-type(2) { right: -5px; top: -1px; }
+.sel i:nth-of-type(3) { left: -5px; bottom: -5px; }
+.sel i:nth-of-type(4) { right: -5px; bottom: -5px; }
+.actions { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; color: var(--ink); }
+.actions div { display: flex; gap: 22px; }
+.actions svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+
+.hero-grid {
+  display: grid; gap: 26px 40px; margin-top: 30px;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  grid-template-areas: "name photo" "pills photo";
+  align-items: start;
+}
+.who { grid-area: name; }
+.name { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(76px, 15vw, 188px); line-height: .9; letter-spacing: -.03em; }
+.role { margin: 14px 0 0; font-weight: 700; font-size: clamp(14px, 1.7vw, 20px); letter-spacing: .24em; text-transform: uppercase; }
+.role span { color: var(--red); }
+.usp { margin: 14px 0 0; max-width: 30ch; font-size: clamp(18px, 2.1vw, 25px); line-height: 1.3; color: var(--soft); text-wrap: balance; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; border-radius: 999px; padding: 15px 24px; text-decoration: none;
+  font-weight: 700; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; transition: transform .2s; border: 0; cursor: pointer; max-width: 100%;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn svg { width: 18px; height: 18px; flex: none; fill: currentColor; }
+.btn.red { background: var(--red); color: #fff; }
+.btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.btn.light { background: var(--pill); color: var(--ink); }
+.btn.light span { color: var(--red); letter-spacing: .04em; overflow-wrap: anywhere; }
+
+.pills { grid-area: pills; display: grid; gap: 12px; align-content: start; }
+.pill { display: flex; align-items: center; gap: 14px; min-width: 0; background: var(--pill); border-radius: var(--r-pill); padding: 13px 20px 13px 14px; box-shadow: var(--shadow); }
+.ic { flex: none; width: 46px; height: 46px; border-radius: 13px; background: var(--red); color: #fff; display: grid; place-items: center; font-size: 20px; line-height: 1; }
+.pill p { margin: 0; min-width: 0; font-size: 18px; line-height: 1.2; }
+.pill p b { font-weight: 700; }
+.pill small { display: block; margin-top: 3px; font-size: 13px; color: var(--mute); letter-spacing: .02em; }
+
+.photo { grid-area: photo; position: relative; }
+.photo-frame { border-radius: 30px; overflow: hidden; background: #d9cfc6; aspect-ratio: 4 / 5; box-shadow: var(--shadow); }
+.photo-frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 22% 30%; }
+.photo .pill { position: absolute; left: 14px; bottom: 14px; right: 14px; max-width: 320px; padding: 11px 16px 11px 11px; }
+.photo .ic { width: 40px; height: 40px; border-radius: 12px; font-size: 17px; }
+.photo .pill p { font-size: 16px; }
+
+/* facts */
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 34px; border-top: 1px solid var(--pill-line); border-bottom: 1px solid var(--pill-line); }
+.fact { padding: 18px 18px 18px 0; min-width: 0; }
+.fact + .fact { padding-left: 18px; border-left: 1px solid var(--pill-line); }
+.fact b { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.1; color: var(--red); }
+.fact span { display: block; margin-top: 6px; font-size: 14px; color: var(--soft); }
+
+/* ribbon */
+.ribbon-zone { overflow: hidden; padding-block: 38px 30px; }
+.ribbon { background: var(--red); color: #fff; transform: rotate(-1.4deg); margin-left: -3%; margin-right: -3%; padding-block: 15px; overflow: hidden; white-space: nowrap; }
+.track { display: inline-flex; animation: slide 36s linear infinite; }
+.track span { font-family: var(--serif); font-style: italic; font-size: clamp(22px, 3vw, 34px); padding-right: .9em; }
+.track span::after { content: "♥"; font-style: normal; font-size: .6em; margin-left: .9em; vertical-align: .15em; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* sections */
+section { padding-block: 40px; scroll-margin-top: 10px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 10px 24px; margin-bottom: 22px; }
+.sec-head h2 { margin: 6px 0 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(38px, 6.4vw, 78px); line-height: 1; letter-spacing: -.02em; text-wrap: balance; }
+.sec-head h2 em { color: var(--red); }
+.sec-head p { margin: 0; max-width: 38ch; color: var(--mute); font-size: 15px; }
+
+/* filters */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.chip { border: 1px solid var(--pill-line); background: transparent; border-radius: 999px; padding: 9px 16px; cursor: pointer; font-size: 14px; font-weight: 500; transition: background .15s, color .15s, border-color .15s; }
+.chip small { margin-left: 6px; color: var(--mute); font-weight: 400; }
+.chip:hover { background: var(--pill); }
+.chip[aria-pressed="true"] { background: var(--black); border-color: var(--black); color: var(--on-dark); }
+.chip[aria-pressed="true"] small { color: #b9b0a7; }
+
+/* gallery */
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card {
+  position: relative; display: block; width: 100%; padding: 0; border: 0; background: #2a2523; cursor: pointer; text-align: left;
+  aspect-ratio: 9 / 16; border-radius: 26px; overflow: hidden; box-shadow: var(--shadow); isolation: isolate; transition: transform .25s ease;
+}
+.card:hover { transform: translateY(-4px); }
+.thumb { position: absolute; inset: 0; }
+.thumb img, .thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb video { opacity: 0; transition: opacity .3s; }
+.thumb video.on { opacity: 1; }
+.card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 14, 12, .9) 0%, rgba(20, 14, 12, .3) 42%, rgba(20, 14, 12, 0) 64%); pointer-events: none; z-index: 1; }
+.card .tag { position: absolute; left: 12px; top: 12px; z-index: 2; background: var(--pill); color: var(--ink); border-radius: 999px; padding: 5px 11px; font-size: 12px; font-weight: 600; }
+.card .dur { position: absolute; right: 12px; top: 12px; z-index: 2; background: rgba(20, 14, 12, .55); color: #fff; border-radius: 999px; padding: 5px 10px; font-size: 12px; font-variant-numeric: tabular-nums; }
+.card .meta { position: absolute; left: 14px; right: 62px; bottom: 14px; z-index: 2; color: #fff; min-width: 0; }
+.card .meta small { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255, 255, 255, .7); margin-bottom: 4px; }
+.card .meta b { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 21px; line-height: 1.12; text-wrap: balance; }
+.card .meta span { display: block; margin-top: 6px; font-size: 12.5px; line-height: 1.3; color: rgba(255, 255, 255, .8); }
+.card .play { position: absolute; right: 12px; bottom: 14px; z-index: 3; width: 42px; height: 42px; border-radius: 50%; background: var(--red); display: grid; place-items: center; }
+.card .meta + .play { bottom: auto; top: auto; }
+.card .play svg { width: 16px; height: 16px; fill: #fff; margin-left: 2px; }
+.playpos { position: absolute; right: 12px; z-index: 3; }
+
+/* formats */
+.formats { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.fmt { background: var(--pill); border-radius: 22px; padding: 20px 20px 18px; box-shadow: var(--shadow); display: grid; gap: 8px; align-content: start; min-width: 0; }
+.fmt h3 { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 25px; line-height: 1.1; }
+.fmt p { margin: 0; font-size: 15px; color: var(--soft); }
+.fmt .ex { justify-self: start; margin-top: 4px; border: 0; background: none; padding: 0; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--red); cursor: pointer; }
+.fmt .ex:hover { text-decoration: underline; }
+.fmt .ex.muted { color: var(--mute); cursor: default; text-decoration: none; font-weight: 600; }
+.fmt.dark { background: var(--black); color: var(--on-dark); }
+.fmt.dark p { color: #cfc7bf; }
+
+/* niches */
+.niches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.niche { background: var(--pill); border-radius: 22px; padding: 18px; box-shadow: var(--shadow); display: grid; gap: 12px; align-content: start; min-width: 0; }
+.niche .ic { width: 40px; height: 40px; border-radius: 12px; font-size: 17px; }
+.niche h3 { margin: 0; font-size: 18px; line-height: 1.2; font-weight: 700; }
+.niche p { margin: 0; font-size: 14px; color: var(--soft); }
+.also { margin: 16px 2px 0; font-size: 15px; color: var(--soft); }
+.also b { color: var(--ink); }
+
+/* process */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; counter-reset: st; }
+.steps li { counter-increment: st; background: var(--pill); border-radius: 22px; padding: 18px; box-shadow: var(--shadow); min-width: 0; display: grid; gap: 6px; align-content: start; }
+.steps li::before { content: counter(st); font-family: var(--serif); font-style: italic; font-size: 34px; line-height: 1; color: var(--red); }
+.steps b { font-size: 17px; }
+.steps span { font-size: 14px; color: var(--soft); }
+.speed { margin-top: 14px; display: flex; align-items: center; gap: 14px; background: var(--black); color: var(--on-dark); border-radius: 22px; padding: 16px 20px; }
+.speed .ic { width: 40px; height: 40px; border-radius: 12px; font-size: 17px; }
+.speed p { margin: 0; font-size: 16px; min-width: 0; }
+.speed p b { color: #fff; }
+
+/* prices */
+.prices { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.price { border-radius: 26px; padding: 22px 24px 24px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.price.dark { background: var(--black); color: var(--on-dark); }
+.price.light { background: var(--pill); color: var(--ink); box-shadow: var(--shadow); }
+.price.red { background: var(--red); color: #fff; }
+.price .lab { font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; opacity: .78; }
+.price .line { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.price .line i { font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); }
+.price .line strong { font-size: clamp(30px, 3.4vw, 42px); font-weight: 700; letter-spacing: -.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.price .per { justify-self: start; border-radius: 999px; padding: 4px 11px; font-size: 13px; font-weight: 600; background: rgba(255, 255, 255, .16); }
+.price.light .per { background: var(--bg); }
+.price .sub { font-size: 14px; opacity: .85; }
+.price .best { justify-self: start; background: #fff; color: var(--red); border-radius: 999px; padding: 4px 11px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.incl { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+.incl span { background: var(--pill); border-radius: 999px; padding: 8px 14px; font-size: 14px; box-shadow: var(--shadow); }
+.incl span b { color: var(--red); font-weight: 700; }
+.from { margin: 14px 2px 0; font-size: 14px; color: var(--mute); }
+
+/* faq */
+.faq { display: grid; gap: 10px; max-width: 860px; }
+.faq details { background: var(--pill); border-radius: 20px; box-shadow: var(--shadow); }
+.faq summary { list-style: none; cursor: pointer; padding: 17px 56px 17px 20px; font-size: 17px; font-weight: 600; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-family: var(--serif); font-size: 28px; color: var(--red); line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq p { margin: 0; padding: 0 20px 18px; color: var(--soft); max-width: 65ch; }
+
+/* closing */
+.closing { background: var(--red); color: #fff; border-radius: 34px; padding: clamp(26px, 5vw, 56px); display: grid; gap: 26px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+.closing h2 { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(46px, 8vw, 104px); line-height: .98; letter-spacing: -.02em; }
+.closing .offer { margin: 18px 0 0; font-size: 19px; line-height: 1.35; max-width: 30ch; }
+.closing .offer b { background: #fff; color: var(--red); padding: 0 .25em; border-radius: 6px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.tpl { background: rgba(255, 255, 255, .13); border-radius: 20px; padding: 16px 18px; }
+.tpl small { display: block; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .78; margin-bottom: 8px; }
+.tpl p { margin: 0 0 12px; font-size: 15px; line-height: 1.45; white-space: pre-line; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.contacts { display: grid; gap: 8px; margin-top: 14px; }
+.ct { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: rgba(255, 255, 255, .13); border-radius: 18px; padding: 10px 10px 10px 18px; min-width: 0; }
+.ct small { display: block; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .75; }
+.ct { flex-wrap: wrap; }
+.ct a, .ct .v { font-size: clamp(16px, 4.4vw, 19px); font-weight: 600; text-decoration: none; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ct a:hover { text-decoration: underline; }
+.copy { flex: none; border: 0; background: var(--pill); color: var(--ink); border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.foot { padding-block: 26px 10px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; font-size: 13px; color: var(--mute); }
+
+/* sticky telegram */
+.float {
+  position: fixed; z-index: 40; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 16px 30px -12px rgba(120, 10, 20, .55); padding: 13px 20px;
+}
+
+/* modal */
+.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(22, 17, 15, .88); backdrop-filter: blur(10px);
+  padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.stage { display: grid; gap: 14px; justify-items: center; max-width: 100%; }
+.player { display: flex; align-items: center; gap: 18px; }
+.player video { height: min(78vh, 840px); max-height: 78dvh; aspect-ratio: 9 / 16; max-width: calc(100vw - 32px); background: #000; border-radius: 24px; object-fit: contain; display: block; }
+.nav { flex: none; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--pill); color: var(--ink); cursor: pointer; display: grid; place-items: center; }
+.nav svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nav:hover { background: #fff; }
+.cap { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 12px; color: var(--on-dark); text-align: center; }
+.cap .t { background: var(--pill); color: var(--ink); border-radius: 999px; padding: 4px 11px; font-size: 12px; font-weight: 600; }
+.cap b { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 20px; }
+.x { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); }
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .niches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .prices { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "name" "photo" "pills"; }
+  .closing { grid-template-columns: minmax(0, 1fr); }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact:nth-child(3) { padding-left: 0; border-left: 0; }
+  .fact:nth-child(n+3) { border-top: 1px solid var(--pill-line); }
+}
+@media (max-width: 620px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .steps { grid-template-columns: minmax(0, 1fr); }
+  .niches { grid-template-columns: minmax(0, 1fr); }
+  .card { border-radius: 20px; }
+  .card .meta { left: 10px; right: 10px; bottom: 10px; }
+  .card .meta b { font-size: 17px; padding-right: 0; }
+  .card .meta span, .card .meta small { display: none; }
+  .card .play { width: 36px; height: 36px; right: 8px; top: 40px; bottom: auto; }
+  .card .tag { left: 8px; top: 8px; font-size: 11px; padding: 4px 9px; }
+  .card .dur { right: 8px; top: 8px; font-size: 11px; }
+  .player { gap: 0; }
+  .player .nav { position: absolute; bottom: max(16px, env(safe-area-inset-bottom, 0px)); z-index: 2; }
+  .player .nav.prev { left: max(16px, env(safe-area-inset-left, 0px)); }
+  .player .nav.next { right: max(16px, env(safe-area-inset-right, 0px)); }
+  .player video { height: min(72dvh, 760px); }
+  .actions div { gap: 16px; }
+  .btn { padding: 14px 20px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .track { animation: none; }
+  .card, .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <div class="topbar eyebrow"><span>@alenkapodlivaeva</span><span>//</span><span>UGC · Москва</span></div>
+
+  <header class="hero">
+    <h1 class="lead">Живые ролики для бизнеса, <b>которые</b><br>
+      <span class="sel"><i></i><i></i><i></i><i></i>досматривают <em>до конца.</em></span>
+    </h1>
+    <div class="actions" aria-hidden="true">
+      <div>
+        <svg viewBox="0 0 32 32"><path d="M16 27C6 20 4 14.5 4 11.2 4 7.6 6.8 5 10.2 5c2.4 0 4.6 1.3 5.8 3.4C17.2 6.3 19.4 5 21.8 5 25.2 5 28 7.6 28 11.2 28 14.5 26 20 16 27z"/></svg>
+        <svg viewBox="0 0 32 32"><path d="M16 5C9.4 5 5 9 5 14.2c0 2.5 1 4.7 2.8 6.4L6.5 26l5.3-2.3c1.3.4 2.7.6 4.2.6 6.6 0 11-4 11-9.2S22.6 5 16 5z"/></svg>
+        <svg viewBox="0 0 32 32"><path d="M27 5L4.5 14.3l8.7 3.5L16.7 27 27 5zM13.2 17.8L27 5"/></svg>
+      </div>
+      <svg viewBox="0 0 32 32"><path d="M8 4.5h16v23l-8-6.5-8 6.5z"/></svg>
+    </div>
+
+    <div class="hero-grid">
+      <div class="who">
+        <p class="name">Алена</p>
+        <p class="role">UGC-<span>креатор</span></p>
+        <p class="usp">Снимаю нативные ролики для брендов, школ и заведений: от идеи и сценария до готового видео с моим голосом.</p>
+        <div class="cta-row">
+          <a class="btn red" href="https://t.me/AlenaPodlivaeva" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21.5 3.6L2.9 10.8c-1.3.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.5-1.5zM8.400 13.400l9.700-6.100c.5-.3.9-.1.5.2l-8.200 7.400-.3 3.400-1.700-4.900z"/></svg>Написать в Telegram</a>
+          <a class="btn ghost" href="#works">Смотреть работы</a>
+        </div>
+      </div>
+
+      <div class="pills">
+        <div class="pill"><span class="ic">★</span><p><b>2 года</b> веду студию танцев<small>контент · SMM · монтаж · UGC</small></p></div>
+        <div class="pill"><span class="ic">✦</span><p>Веду страницу <b>института психологии</b></p></div>
+        <div class="pill"><span class="ic">◆</span><p>Снимала для <b>люксовых брендов</b><small>посуда · косметика</small></p></div>
+      </div>
+
+      <div class="photo">
+        <div class="photo-frame"><img src="p/alena2.jpg" alt="Алена Подливаева в красном костюме" width="533" height="666"></div>
+        <div class="pill"><span class="ic">●</span><p><b>Москва</b><small>снимаю у себя или у вас</small></p></div>
+      </div>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><b>Полный цикл</b><span>идея, сценарий, съёмка, озвучка и монтаж</span></div>
+      <div class="fact"><b>Свой голос</b><span>приятная озвучка, чистая запись</span></div>
+      <div class="fact"><b>Самозанятая</b><span>работаю официально, выдаю чек</span></div>
+      <div class="fact"><b>от 1 250 ₽</b><span>за ролик, цена после брифа</span></div>
+    </div>
+  </header>
+</div>
+
+<div class="ribbon-zone" aria-hidden="true">
+  <div class="ribbon"><div class="track">
+    <span>Идея и сценарий</span><span>Озвучка</span><span>Съёмка</span><span>Монтаж</span><span>Полный цикл</span><span>Идея и сценарий</span><span>Озвучка</span><span>Съёмка</span><span>Монтаж</span><span>Полный цикл</span>
+    <span>Идея и сценарий</span><span>Озвучка</span><span>Съёмка</span><span>Монтаж</span><span>Полный цикл</span><span>Идея и сценарий</span><span>Озвучка</span><span>Съёмка</span><span>Монтаж</span><span>Полный цикл</span>
+  </div></div>
+</div>
+
+<main class="wrap">
+  <section id="works" style="padding-top:6px">
+    <div class="sec-head">
+      <div><div class="eyebrow">Портфолио</div><h2>Мои <em>работы</em></h2></div>
+      <p>Нажмите на ролик, он откроется со звуком. Внизу карточки указаны формат и задача ролика.</p>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Фильтр по формату"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div><div class="eyebrow">Что снимаю</div><h2>Форматы <em>роликов</em></h2></div>
+      <p>Выберите формат под задачу или доверьте выбор мне: предложу идеи на брифе.</p>
+    </div>
+    <div class="formats">
+      <div class="fmt"><h3>Продукт в жизни</h3><p>Товар в обычной сцене, без рекламного тона. Зритель видит, как вещь работает в жизни.</p><button class="ex" type="button" data-open="v03">Смотреть пример →</button></div>
+      <div class="fmt"><h3>Польза и советы</h3><p>«5 ошибок», лайфхаки, неочевидные факты о продукте. Такие ролики сохраняют и пересылают.</p><button class="ex" type="button" data-open="v08">Смотреть пример →</button></div>
+      <div class="fmt"><h3>Обучение и эксперт</h3><p>Конспекты, разборы, взгляд ученика. Для онлайн-школ, курсов и экспертов.</p><button class="ex" type="button" data-open="v01">Смотреть пример →</button></div>
+      <div class="fmt"><h3>Атмосфера места</h3><p>Кафе, студия или мероприятие глазами гостя. Хочется прийти самому.</p><button class="ex" type="button" data-open="v09">Смотреть пример →</button></div>
+      <div class="fmt"><h3>Распаковка и обзор</h3><p>Первое впечатление, детали, тест в деле. Честно и по-человечески.</p><span class="ex muted">Сниму под ваш продукт</span></div>
+      <div class="fmt"><h3>Отзыв покупателя</h3><p>«Попробовала и рассказываю»: живой отзыв от первого лица для рекламы и соцсетей.</p><span class="ex muted">Сниму под ваш продукт</span></div>
+      <div class="fmt dark"><h3>Для WB и Ozon</h3><p>Короткие вертикальные видео для карточек товаров на маркетплейсах.</p><span class="ex muted">Сниму под ваш товар</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div><div class="eyebrow">Ниши</div><h2>С кем <em>работаю</em></h2></div></div>
+    <div class="niches">
+      <div class="niche"><span class="ic">◆</span><h3>Посуда и товары для дома</h3><p>Кухня, уют, бытовые мелочи. Снимала для люксового бренда посуды.</p></div>
+      <div class="niche"><span class="ic">✦</span><h3>Школы и обучение</h3><p>Онлайн-школы, курсы, эксперты. Веду страницу института психологии.</p></div>
+      <div class="niche"><span class="ic">★</span><h3>Кафе, студии, мероприятия</h3><p>Заведения и события в Москве. Два года веду студию танцев.</p></div>
+      <div class="niche"><span class="ic">♥</span><h3>Красота и стиль</h3><p>Косметика, бьюти-услуги, одежда. Снимала для косметического бренда.</p></div>
+    </div>
+    <p class="also">Также снимаю <b>детские товары</b> (у меня дочь 6 лет), технику и гаджеты.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div><div class="eyebrow">Процесс</div><h2>Как проходит <em>работа</em></h2></div>
+      <p>Главное согласуем до съёмки, поэтому готовый ролик почти не приходится переделывать.</p>
+    </div>
+    <ol class="steps">
+      <li><b>Бриф</b><span>Вы присылаете продукт, задачу и ролики, которые нравятся.</span></li>
+      <li><b>Сценарий</b><span>Пишу идеи и тексты, согласуем их до съёмки.</span></li>
+      <li><b>Съёмка</b><span>В светлой бежевой квартире или у вас, на Samsung S23.</span></li>
+      <li><b>Монтаж и озвучка</b><span>Аккуратный монтаж в CapCut, чистый голос.</span></li>
+      <li><b>Готовые ролики</b><span>Отправляю вертикальные видео и вношу правки.</span></li>
+    </ol>
+    <div class="speed"><span class="ic">✦</span><p><b>Пакет из 8 роликов — от 4 дней съёмки.</b> Я снимаю не больше 2 роликов в день для одного бренда: без конвейера, с живым взглядом на каждое видео.</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div><div class="eyebrow">Стоимость</div><h2>Пакеты <em>роликов</em></h2></div></div>
+    <div class="prices">
+      <div class="price dark"><span class="lab">Старт</span><div class="line"><i>8 роликов</i><strong>10 000 ₽</strong></div><span class="per">1 250 ₽ за ролик</span><span class="sub">Чтобы познакомиться и проверить формат.</span></div>
+      <div class="price light"><span class="lab">Выезд к вам</span><div class="line"><i>5 роликов</i><strong>от 7 000 ₽</strong></div><span class="per">за один визит</span><span class="sub">Кафе, клиники, студии: снимаю на месте в Москве.</span></div>
+      <div class="price red"><span class="best">Выгоднее всего</span><span class="lab">Сопровождение на месяц</span><div class="line"><i>24 ролика</i><strong>30 000 ₽</strong></div><span class="per">1 250 ₽ за ролик</span><span class="sub">6 роликов в неделю: регулярный контент без пауз.</span></div>
+    </div>
+    <div class="incl">
+      <span><b>✓</b> Идея и сценарий</span><span><b>✓</b> Озвучка</span><span><b>✓</b> Съёмка</span><span><b>✓</b> Монтаж</span><span><b>✓</b> Чек самозанятой</span><span><b>♥</b> Бонус: публикация в соавторстве в Reels</span>
+    </div>
+    <p class="from">Отдельный ролик от 1 250 ₽. Итоговую цену назову после брифа: она зависит от задачи, формата и сложности.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><div><div class="eyebrow">Вопросы</div><h2>Частые <em>вопросы</em></h2></div></div>
+    <div class="faq">
+      <details><summary>Вы блогер?</summary><p>Нет, я UGC-креатор. Снимаю ролики для ваших аккаунтов, сайта и рекламы. Если хотите, могу дополнительно опубликовать ролик у себя в соавторстве.</p></details>
+      <details><summary>Сколько ждать готовые ролики?</summary><p>Пакет из 8 роликов занимает от 4 дней съёмки плюс время на согласование сценария. Точные сроки назову после брифа.</p></details>
+      <details><summary>Сколько правок входит?</summary><p>Основные правки делаем на этапе сценария, до съёмки. Количество правок готовых роликов фиксируем на брифе.</p></details>
+      <details><summary>Можно запускать ролики в рекламу и на маркетплейсы?</summary><p>Условия использования в таргете, рекламе и на маркетплейсах обсуждаем на старте и фиксируем письменно.</p></details>
+      <details><summary>Отдаёте исходники?</summary><p>По запросу. Обсуждаем при заказе.</p></details>
+      <details><summary>Как оформляется оплата?</summary><p>Я самозанятая: работаю официально и выдаю чек, его можно передать в бухгалтерию.</p></details>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-bottom:10px">
+    <div class="closing">
+      <div>
+        <h2>Налепим красоты? ♥</h2>
+        <p class="offer">Пришлите ссылку на продукт, и я <b>бесплатно предложу 3 идеи</b> для роликов.</p>
+        <div class="links">
+          <a class="btn light" href="https://t.me/AlenaPodlivaeva" target="_blank" rel="noopener">Telegram <span>@AlenaPodlivaeva</span></a>
+        </div>
+      </div>
+      <div>
+        <div class="tpl">
+          <small>Что написать в первом сообщении</small>
+          <p id="tpl">Здравствуйте, Алена! Наш продукт: (ссылка)
+Задача: (что нужно от роликов)
+Сроки: (когда нужны видео)</p>
+          <button class="copy" type="button" data-copy-el="tpl">Скопировать текст</button>
+        </div>
+        <div class="contacts">
+          <div class="ct"><div><small>Телефон</small><span class="v" id="phone">+7 (906) 064-23-26</span></div><button class="copy" type="button" data-copy="+79060642326">Скопировать</button></div>
+          <div class="ct"><div><small>Telegram</small><a href="https://t.me/AlenaPodlivaeva" target="_blank" rel="noopener">@AlenaPodlivaeva</a></div><button class="copy" type="button" data-copy="@AlenaPodlivaeva">Скопировать</button></div>
+          <div class="ct"><div><small>Instagram</small><a href="https://instagram.com/alenkapodlivaeva" target="_blank" rel="noopener">@alenkapodlivaeva</a></div><button class="copy" type="button" data-copy="@alenkapodlivaeva">Скопировать</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot"><span>Алена Подливаева · UGC-креатор · самозанятая</span><span>+7 (906) 064-23-26 · Telegram @AlenaPodlivaeva · Москва</span></footer>
+</main>
+
+<a class="btn red float" id="float" href="https://t.me/AlenaPodlivaeva" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21.5 3.6L2.9 10.8c-1.3.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.5-1.5z"/></svg>Написать</a>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="Просмотр ролика">
+  <button class="nav x" id="close" aria-label="Закрыть"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <div class="stage">
+    <div class="player">
+      <button class="nav prev" id="prev" aria-label="Предыдущий ролик"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <video id="vid" playsinline controls preload="metadata"></video>
+      <button class="nav next" id="next" aria-label="Следующий ролик"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="cap"><span class="t" id="ctag"></span><b id="ctitle"></b></div>
+  </div>
+</div>
+
+<script>
+var FORMATS = { all: 'Все', story: 'Продукт в жизни', tips: 'Польза и советы', expert: 'Обучение', place: 'Атмосфера места' };
+/* Подписи можно менять здесь: файл, формат, ниша, название, задача, длительность. */
+var PROJECTS = [
+  { id: 'v03', fmt: 'story',  niche: 'Посуда',          title: 'Чаёк с ZAZIKI и белка',     task: 'Показать френч-пресс в живой сцене на прогулке', dur: '0:12' },
+  { id: 'v01', fmt: 'expert', niche: 'Онлайн-обучение', title: 'Одной любви недостаточно',  task: 'Конспект лекции института психологии глазами студентки', dur: '0:42' },
+  { id: 'v08', fmt: 'tips',   niche: 'Посуда',          title: '5 ошибок со сковородкой',   task: 'Полезный ролик, который хочется сохранить', dur: '0:35' },
+  { id: 'v09', fmt: 'place',  niche: 'Студия танцев',   title: 'Танго-Стрим',               task: 'Атмосфера студии и кусочек урока в одном ролике', dur: '0:24' },
+  { id: 'v06', fmt: 'story',  niche: 'Посуда',          title: 'Первый подарок кухне',      task: 'Сковородка ZAZIKI в истории о ремонте', dur: '0:22' },
+  { id: 'v11', fmt: 'place',  niche: 'Мероприятие',     title: 'Сады в парке',              task: 'Позвать гостей на мероприятие через атмосферу', dur: '0:20' },
+  { id: 'v10', fmt: 'tips',   niche: 'Посуда',          title: 'Для тех, кто не готовит',   task: 'Неочевидный факт о сковородках', dur: '0:25' },
+  { id: 'v12', fmt: 'place',  niche: 'Студия танцев',   title: 'Приходите на танго',        task: 'Пригласить на вечер танго с юмором', dur: '0:42' }
+];
+
+var grid = document.getElementById('grid');
+var chipsEl = document.getElementById('chips');
+var modal = document.getElementById('modal');
+var vid = document.getElementById('vid');
+var floatBtn = document.getElementById('float');
+var current = -1, visible = PROJECTS.slice(), lastFocus = null;
+var canHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+var PLAY = '<svg viewBox="0 0 16 16"><path d="M3 1.5v13l11-6.5z"/></svg>';
+
+function count(k) { return k === 'all' ? PROJECTS.length : PROJECTS.filter(function (p) { return p.fmt === k; }).length; }
+
+PROJECTS.forEach(function (p) {
+  var b = document.createElement('button');
+  b.className = 'card'; b.type = 'button'; b.dataset.fmt = p.fmt;
+  b.setAttribute('aria-label', 'Смотреть ролик «' + p.title + '»');
+  b.innerHTML = '<span class="thumb"><img src="p/' + p.id + '.jpg" alt="" loading="lazy" width="540" height="960"></span>' +
+    '<span class="tag">' + FORMATS[p.fmt] + '</span><span class="dur">' + p.dur + '</span>' +
+    '<span class="play">' + PLAY + '</span>' +
+    '<span class="meta"><small>' + p.niche + '</small><b>' + p.title + '</b><span>' + p.task + '</span></span>';
+  b.addEventListener('click', function () { lastFocus = b; openVideo(p.id); });
+  if (canHover) {
+    var pv = null;
+    b.addEventListener('pointerenter', function () {
+      pv = document.createElement('video');
+      pv.src = 'v/' + p.id + '.mp4'; pv.muted = true; pv.loop = true; pv.playsInline = true; pv.preload = 'auto';
+      var me = pv;
+      pv.addEventListener('playing', function () { me.classList.add('on'); });
+      b.querySelector('.thumb').appendChild(pv);
+      var pr = pv.play(); if (pr && pr.catch) pr.catch(function () {});
+    });
+    b.addEventListener('pointerleave', function () { if (pv) { pv.pause(); pv.remove(); pv = null; } });
+  }
+  grid.appendChild(b);
+});
+
+Object.keys(FORMATS).forEach(function (k) {
+  var c = document.createElement('button');
+  c.className = 'chip'; c.type = 'button'; c.dataset.fmt = k;
+  c.setAttribute('aria-pressed', k === 'all' ? 'true' : 'false');
+  c.innerHTML = FORMATS[k] + '<small>' + count(k) + '</small>';
+  c.addEventListener('click', function () { filter(k); });
+  chipsEl.appendChild(c);
+});
+
+function filter(k) {
+  visible = PROJECTS.filter(function (p) { return k === 'all' || p.fmt === k; });
+  Array.prototype.forEach.call(grid.children, function (el) { el.hidden = !(k === 'all' || el.dataset.fmt === k); });
+  Array.prototype.forEach.call(chipsEl.children, function (el) { el.setAttribute('aria-pressed', el.dataset.fmt === k ? 'true' : 'false'); });
+}
+
+function show(idx) {
+  var n = visible.length;
+  current = (idx + n) % n;
+  var p = visible[current];
+  vid.pause();
+  vid.poster = 'p/' + p.id + '.jpg';
+  vid.src = 'v/' + p.id + '.mp4';
+  document.getElementById('ctag').textContent = FORMATS[p.fmt] + ' · ' + p.niche;
+  document.getElementById('ctitle').textContent = p.title;
+  var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {});
+}
+function openVideo(id) {
+  if (!visible.some(function (p) { return p.id === id; })) filter('all');
+  var idx = visible.findIndex(function (p) { return p.id === id; });
+  if (idx < 0) return;
+  modal.hidden = false; floatBtn.hidden = true;
+  document.body.style.overflow = 'hidden';
+  show(idx);
+  document.getElementById('close').focus();
+}
+function closeVideo() {
+  modal.hidden = true; floatBtn.hidden = false;
+  vid.pause(); vid.removeAttribute('src'); vid.load();
+  document.body.style.overflow = '';
+  if (lastFocus) lastFocus.focus();
+}
+Array.prototype.forEach.call(document.querySelectorAll('[data-open]'), function (b) {
+  b.addEventListener('click', function () { lastFocus = b; openVideo(b.dataset.open); });
+});
+document.getElementById('close').addEventListener('click', closeVideo);
+document.getElementById('prev').addEventListener('click', function () { show(current - 1); });
+document.getElementById('next').addEventListener('click', function () { show(current + 1); });
+vid.addEventListener('ended', function () { if (visible.length > 1) show(current + 1); });
+modal.addEventListener('click', function (e) { if (e.target === modal || e.target.classList.contains('stage')) closeVideo(); });
+document.addEventListener('keydown', function (e) {
+  if (modal.hidden) return;
+  if (e.key === 'Escape') closeVideo();
+  else if (e.key === 'ArrowLeft') show(current - 1);
+  else if (e.key === 'ArrowRight') show(current + 1);
+});
+
+Array.prototype.forEach.call(document.querySelectorAll('.copy'), function (btn) {
+  var label = btn.textContent;
+  btn.addEventListener('click', function () {
+    var src = btn.dataset.copyEl ? document.getElementById(btn.dataset.copyEl) : btn.parentNode.querySelector('.v, a');
+    var text = btn.dataset.copy || src.textContent;
+    var done = function () { btn.textContent = 'Скопировано'; setTimeout(function () { btn.textContent = label; }, 1600); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(src);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Выделено, скопируйте вручную';
+    };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  });
+});
+</script>
+
+</body>
+</html>
